@@ -1,0 +1,22 @@
+def sort_words_in_sentence(sentence):
+    words = sentence.split()
+    sorted_words = sorted(words)
+    return ' '.join(sorted_words)
+
+def sort_sentences_in_file(input_file, output_file):
+    with open(input_file, 'r') as file:
+        sentences = file.readlines()
+    
+    sorted_sentences = sorted(sentences, key=lambda sentence: sort_words_in_sentence(sentence.lower()))
+    
+    with open(output_file, 'w') as file:
+        for sentence in sorted_sentences:
+            file.write(sort_words_in_sentence(sentence))
+    
+    print("Sentences sorted and written to", output_file)
+
+if __name__ == '__main__':
+    input_file = 'input.txt'
+    output_file = 'output.txt'
+    
+    sort_sentences_in_file(input_file, output_file)
